@@ -13,9 +13,9 @@
 -- -- ddl-end --
 -- 
 
--- object: categoria | type: TABLE --
+-- object: public.categoria | type: TABLE --
 -- DROP TABLE IF EXISTS public.categoria CASCADE;
-CREATE TABLE categoria (
+CREATE TABLE public.categoria (
 	id_categoria serial NOT NULL,
 	tipo varchar(45),
 	tamanio smallint,
@@ -29,7 +29,7 @@ CREATE TABLE categoria (
 
 -- object: public.producto | type: TABLE --
 -- DROP TABLE IF EXISTS public.producto CASCADE;
-CREATE TABLE producto (
+CREATE TABLE public.producto (
 	id_producto serial NOT NULL,
 	nombre varchar(45),
 	precio integer,
@@ -46,14 +46,14 @@ CREATE TABLE producto (
 
 -- object: categoria_fk | type: CONSTRAINT --
 -- ALTER TABLE public.producto DROP CONSTRAINT IF EXISTS categoria_fk CASCADE;
-ALTER TABLE producto ADD CONSTRAINT categoria_fk FOREIGN KEY (id_categoria_categoria)
-REFERENCES categoria (id_categoria) MATCH FULL
+ALTER TABLE public.producto ADD CONSTRAINT categoria_fk FOREIGN KEY (id_categoria_categoria)
+REFERENCES public.categoria (id_categoria) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: public.administrador | type: TABLE --
 -- DROP TABLE IF EXISTS public.administrador CASCADE;
-CREATE TABLE administrador (
+CREATE TABLE public.administrador (
 	id_administrador serial NOT NULL,
 	direccion_correo varchar(45),
 	CONSTRAINT administrador_pk PRIMARY KEY (id_administrador)
@@ -65,7 +65,7 @@ CREATE TABLE administrador (
 
 -- object: public.carrito | type: TABLE --
 -- DROP TABLE IF EXISTS public.carrito CASCADE;
-CREATE TABLE carrito (
+CREATE TABLE public.carrito (
 	id_carrito serial NOT NULL,
 	id_cliente_cliente integer,
 	CONSTRAINT carrito_pk PRIMARY KEY (id_carrito)
@@ -77,7 +77,7 @@ CREATE TABLE carrito (
 
 -- object: public.factura | type: TABLE --
 -- DROP TABLE IF EXISTS public.factura CASCADE;
-CREATE TABLE factura (
+CREATE TABLE public.factura (
 	id_factura serial NOT NULL,
 	precio_total serial,
 	id_repartidor_repartidor integer,
@@ -91,7 +91,7 @@ CREATE TABLE factura (
 
 -- object: public.repartidor | type: TABLE --
 -- DROP TABLE IF EXISTS public.repartidor CASCADE;
-CREATE TABLE repartidor (
+CREATE TABLE public.repartidor (
 	id_repartidor serial NOT NULL,
 	nombre varchar(45),
 	apellido varchar(45),
@@ -104,7 +104,7 @@ CREATE TABLE repartidor (
 
 -- object: public.metodo_pago | type: TABLE --
 -- DROP TABLE IF EXISTS public.metodo_pago CASCADE;
-CREATE TABLE metodo_pago (
+CREATE TABLE public.metodo_pago (
 	id_metodo serial NOT NULL,
 	nombre_metodo varchar(45),
 	id_factura_factura integer,
@@ -117,7 +117,7 @@ CREATE TABLE metodo_pago (
 
 -- object: public.cliente | type: TABLE --
 -- DROP TABLE IF EXISTS public.cliente CASCADE;
-CREATE TABLE cliente (
+CREATE TABLE public.cliente (
 	id_cliente serial NOT NULL,
 	nombre varchar(45),
 	apellido varchar(45),
@@ -131,7 +131,7 @@ CREATE TABLE cliente (
 
 -- object: public.telefono | type: TABLE --
 -- DROP TABLE IF EXISTS public.telefono CASCADE;
-CREATE TABLE telefono (
+CREATE TABLE public.telefono (
 	id_telefono serial NOT NULL,
 	num_telefono integer,
 	id_cliente_cliente integer,
@@ -144,7 +144,7 @@ CREATE TABLE telefono (
 
 -- object: public.direccion | type: TABLE --
 -- DROP TABLE IF EXISTS public.direccion CASCADE;
-CREATE TABLE direccion (
+CREATE TABLE public.direccion (
 	id_direccion serial NOT NULL,
 	calle smallint,
 	torre smallint,
@@ -161,7 +161,7 @@ CREATE TABLE direccion (
 
 -- object: public.ciudad | type: TABLE --
 -- DROP TABLE IF EXISTS public.ciudad CASCADE;
-CREATE TABLE ciudad (
+CREATE TABLE public.ciudad (
 	id_ciudad serial NOT NULL,
 	nombre_ciudad varchar(45),
 	CONSTRAINT ciudad_pk PRIMARY KEY (id_ciudad)
@@ -173,23 +173,157 @@ CREATE TABLE ciudad (
 
 -- object: administrador_fk | type: CONSTRAINT --
 -- ALTER TABLE public.producto DROP CONSTRAINT IF EXISTS administrador_fk CASCADE;
-ALTER TABLE producto ADD CONSTRAINT administrador_fk FOREIGN KEY (id_administrador_administrador)
-REFERENCES administrador (id_administrador) MATCH FULL
+ALTER TABLE public.producto ADD CONSTRAINT administrador_fk FOREIGN KEY (id_administrador_administrador)
+REFERENCES public.administrador (id_administrador) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: ciudad_fk | type: CONSTRAINT --
 -- ALTER TABLE public.direccion DROP CONSTRAINT IF EXISTS ciudad_fk CASCADE;
-ALTER TABLE direccion ADD CONSTRAINT ciudad_fk FOREIGN KEY (id_ciudad_ciudad)
-REFERENCES ciudad (id_ciudad) MATCH FULL
+ALTER TABLE public.direccion ADD CONSTRAINT ciudad_fk FOREIGN KEY (id_ciudad_ciudad)
+REFERENCES public.ciudad (id_ciudad) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: public.cliente_direccion | type: TABLE --
 -- DROP TABLE IF EXISTS public.cliente_direccion CASCADE;
-CREATE TABLE cliente_direccion (
+CREATE TABLE public.cliente_direccion (
 	id_cliente_cliente integer NOT NULL,
 	id_direccion_direccion integer NOT NULL,
-	CONSTRAI
+	CONSTRAINT cliente_direccion_pk PRIMARY KEY (id_cliente_cliente,id_direccion_direccion)
 
--- SQL code purposely truncated at this point in demo version!
+);
+-- ddl-end --
+-- ALTER TABLE public.cliente_direccion OWNER TO postgres;
+-- ddl-end --
+
+-- object: cliente_fk | type: CONSTRAINT --
+-- ALTER TABLE public.cliente_direccion DROP CONSTRAINT IF EXISTS cliente_fk CASCADE;
+ALTER TABLE public.cliente_direccion ADD CONSTRAINT cliente_fk FOREIGN KEY (id_cliente_cliente)
+REFERENCES public.cliente (id_cliente) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: direccion_fk | type: CONSTRAINT --
+-- ALTER TABLE public.cliente_direccion DROP CONSTRAINT IF EXISTS direccion_fk CASCADE;
+ALTER TABLE public.cliente_direccion ADD CONSTRAINT direccion_fk FOREIGN KEY (id_direccion_direccion)
+REFERENCES public.direccion (id_direccion) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: cliente_fk | type: CONSTRAINT --
+-- ALTER TABLE public.telefono DROP CONSTRAINT IF EXISTS cliente_fk CASCADE;
+ALTER TABLE public.telefono ADD CONSTRAINT cliente_fk FOREIGN KEY (id_cliente_cliente)
+REFERENCES public.cliente (id_cliente) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: repartidor_fk | type: CONSTRAINT --
+-- ALTER TABLE public.factura DROP CONSTRAINT IF EXISTS repartidor_fk CASCADE;
+ALTER TABLE public.factura ADD CONSTRAINT repartidor_fk FOREIGN KEY (id_repartidor_repartidor)
+REFERENCES public.repartidor (id_repartidor) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: factura_fk | type: CONSTRAINT --
+-- ALTER TABLE public.metodo_pago DROP CONSTRAINT IF EXISTS factura_fk CASCADE;
+ALTER TABLE public.metodo_pago ADD CONSTRAINT factura_fk FOREIGN KEY (id_factura_factura)
+REFERENCES public.factura (id_factura) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: cliente_fk | type: CONSTRAINT --
+-- ALTER TABLE public.carrito DROP CONSTRAINT IF EXISTS cliente_fk CASCADE;
+ALTER TABLE public.carrito ADD CONSTRAINT cliente_fk FOREIGN KEY (id_cliente_cliente)
+REFERENCES public.cliente (id_cliente) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: carrito_fk | type: CONSTRAINT --
+-- ALTER TABLE public.factura DROP CONSTRAINT IF EXISTS carrito_fk CASCADE;
+ALTER TABLE public.factura ADD CONSTRAINT carrito_fk FOREIGN KEY (id_carrito_carrito)
+REFERENCES public.carrito (id_carrito) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: factura_uq | type: CONSTRAINT --
+-- ALTER TABLE public.factura DROP CONSTRAINT IF EXISTS factura_uq CASCADE;
+ALTER TABLE public.factura ADD CONSTRAINT factura_uq UNIQUE (id_carrito_carrito);
+-- ddl-end --
+
+-- object: public.carrito_producto | type: TABLE --
+-- DROP TABLE IF EXISTS public.carrito_producto CASCADE;
+CREATE TABLE public.carrito_producto (
+
+);
+-- ddl-end --
+
+-- object: id_carrito_carrito | type: COLUMN --
+-- ALTER TABLE public.carrito_producto DROP COLUMN IF EXISTS id_carrito_carrito CASCADE;
+ALTER TABLE public.carrito_producto ADD COLUMN id_carrito_carrito integer NOT NULL;
+-- ddl-end --
+
+
+-- object: id_producto_producto | type: COLUMN --
+-- ALTER TABLE public.carrito_producto DROP COLUMN IF EXISTS id_producto_producto CASCADE;
+ALTER TABLE public.carrito_producto ADD COLUMN id_producto_producto integer NOT NULL;
+-- ddl-end --
+
+
+-- object: cantidad | type: COLUMN --
+-- ALTER TABLE public.carrito_producto DROP COLUMN IF EXISTS cantidad CASCADE;
+ALTER TABLE public.carrito_producto ADD COLUMN cantidad integer;
+-- ddl-end --
+
+
+
+-- object: carrito_producto_pk | type: CONSTRAINT --
+-- ALTER TABLE public.carrito_producto DROP CONSTRAINT IF EXISTS carrito_producto_pk CASCADE;
+ALTER TABLE public.carrito_producto ADD CONSTRAINT carrito_producto_pk PRIMARY KEY (id_carrito_carrito,id_producto_producto);
+-- ddl-end --
+
+-- ALTER TABLE public.carrito_producto OWNER TO postgres;
+-- ddl-end --
+
+-- object: carrito_fk | type: CONSTRAINT --
+-- ALTER TABLE public.carrito_producto DROP CONSTRAINT IF EXISTS carrito_fk CASCADE;
+ALTER TABLE public.carrito_producto ADD CONSTRAINT carrito_fk FOREIGN KEY (id_carrito_carrito)
+REFERENCES public.carrito (id_carrito) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: producto_fk | type: CONSTRAINT --
+-- ALTER TABLE public.carrito_producto DROP CONSTRAINT IF EXISTS producto_fk CASCADE;
+ALTER TABLE public.carrito_producto ADD CONSTRAINT producto_fk FOREIGN KEY (id_producto_producto)
+REFERENCES public.producto (id_producto) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: public.factura_producto | type: TABLE --
+-- DROP TABLE IF EXISTS public.factura_producto CASCADE;
+CREATE TABLE public.factura_producto (
+	id_factura_factura integer NOT NULL,
+	id_producto_producto integer NOT NULL,
+	cantidad integer,
+	precio_total integer,
+	CONSTRAINT factura_producto_pk PRIMARY KEY (id_factura_factura,id_producto_producto)
+
+);
+-- ddl-end --
+-- ALTER TABLE public.factura_producto OWNER TO postgres;
+-- ddl-end --
+
+-- object: factura_fk | type: CONSTRAINT --
+-- ALTER TABLE public.factura_producto DROP CONSTRAINT IF EXISTS factura_fk CASCADE;
+ALTER TABLE public.factura_producto ADD CONSTRAINT factura_fk FOREIGN KEY (id_factura_factura)
+REFERENCES public.factura (id_factura) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
+-- object: producto_fk | type: CONSTRAINT --
+-- ALTER TABLE public.factura_producto DROP CONSTRAINT IF EXISTS producto_fk CASCADE;
+ALTER TABLE public.factura_producto ADD CONSTRAINT producto_fk FOREIGN KEY (id_producto_producto)
+REFERENCES public.producto (id_producto) MATCH FULL
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
+
