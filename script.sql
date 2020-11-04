@@ -326,4 +326,3 @@ ALTER TABLE public.factura_producto ADD CONSTRAINT producto_fk FOREIGN KEY (id_p
 REFERENCES public.producto (id_producto) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
-
