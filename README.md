@@ -1,2 +1,2 @@
 # ProyectoHuevos
- Proyecto para bases de datos: modelo de negocio
+ Proyecto para bases de datos: modelo de negocio.
