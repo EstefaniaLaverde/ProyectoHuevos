@@ -10,7 +10,8 @@ class carrito(models.Model):
     id_cliente = models.ForeignKey(cliente, on_delete=models.CASCADE)
 
 class carrito_producto (models.Model):
-    id_carrito_carrito = models.ForeignKey(carrito, on_delete=models.CASCADE, primary_key=True)
-    id_producto_producto = models.ForeignKey(producto, on_delete=models.CASCADE, primary_key=True)
+    class Meta:
+        unique_together = (('id_carrito_carrito', 'id_producto_producto'),)
+    id_carrito_carrito = models.ForeignKey(carrito, on_delete=models.CASCADE)
+    id_producto_producto = models.ForeignKey(producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
-
