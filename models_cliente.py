@@ -24,6 +24,7 @@ class direccion(models.Model):
     sufijo = models.CharField(max_length=45)
     num_secundario = models.SmallIntegerField()
     otro = models.CharField(max_length=70)
+    id_ciudad_ciudad = models.ForeignKey(ciudad, on_delete=models.CASCADE)
 
 class cliente_direccion(models.Model):
     id_cliente_cliente = models.ForeignKey(cliente, on_delete=models.CASCADE, primary_key=True)
