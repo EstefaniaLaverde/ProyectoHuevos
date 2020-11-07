@@ -25,6 +25,6 @@ class direccion(models.Model):
     num_secundario = models.SmallIntegerField()
     otro = models.CharField(max_length=70)
 
-class calle_direccion(models.Model):
+class cliente_direccion(models.Model):
     id_cliente_cliente = models.ForeignKey(cliente, on_delete=models.CASCADE, primary_key=True)
     id_direccion_direccion = models.ForeignKey(direccion, on_delete=models.CASCADE, primary_key=True)
