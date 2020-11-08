@@ -23,6 +23,7 @@ class direccion(models.Model):
     num_principal = models.SmallIntegerField()
     sufijo = models.CharField(max_length=45)
     num_secundario = models.SmallIntegerField()
+    num_terciario = models.SmallIntegerField()
     otro = models.CharField(max_length=70)
     id_ciudad_ciudad = models.ForeignKey(ciudad, on_delete=models.CASCADE)
 
