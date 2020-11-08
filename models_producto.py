@@ -9,6 +9,8 @@ class categoria(models.Model):
 
 class administrador(models.Model):
     id_administrador = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=45)
+    apellido = models.CharField(max_length=45)
     correo = models.CharField(max_length=65)
 
 class producto(models.Model):
