@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib import admin
 # Create your models here.
 
 class cliente(models.Model):
@@ -26,6 +26,14 @@ class direccion(models.Model):
     otro = models.CharField(max_length=70)
     id_ciudad_ciudad = models.ForeignKey(ciudad, on_delete=models.CASCADE)
 
-class cliente_direccion(models.Model):
-    id_cliente_cliente = models.ForeignKey(cliente, on_delete=models.CASCADE, primary_key=True)
-    id_direccion_direccion = models.ForeignKey(direccion, on_delete=models.CASCADE, primary_key=True)
+class calle_direccion(models.Model):
+    class Meta:
+        unique_together = (('id_cliente_cliente', 'id_direccion_direccion'),)
+    id_cliente_cliente = models.ForeignKey(cliente, on_delete=models.CASCADE)
+    id_direccion_direccion = models.ForeignKey(direccion, on_delete=models.CASCADE)
+
+admin.site.register(cliente)
+admin.site.register(telefono)
+admin.site.register(ciudad)
+admin.site.register(direccion)
+admin.site.register(calle_direccion)
