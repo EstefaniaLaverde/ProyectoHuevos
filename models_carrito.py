@@ -3,6 +3,8 @@ from django.db import models
 from apps.cliente.models import cliente
 from apps.producto.models import producto
 
+from django.contrib import admin
+
 # Create your models here.
 
 class carrito(models.Model):
@@ -15,3 +17,6 @@ class carrito_producto (models.Model):
     id_carrito_carrito = models.ForeignKey(carrito, on_delete=models.CASCADE)
     id_producto_producto = models.ForeignKey(producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
+
+admin.site.register(carrito)
+admin.site.register(carrito_producto)
