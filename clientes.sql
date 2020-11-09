@@ -101,35 +101,35 @@ values (300,'Gotham');
 
 -- en tipo va calle, carrera, avenida, transversal o diagonal
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (100,'carrera',127,'A',70,'Torre 2 Apto 408',100);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (100,'carrera',127,'A',70,'H',38,'Torre 2 Apto 408',100);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (200,'carrera',100,'A',10,'Torre 5 Apto 102',100);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario,  otro, id_ciudad_ciudad_id)
+values (200,'carrera',100,'A',10,'H',78,'Torre 5 Apto 102',100);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (300,'carrera',90,'A',20,'Torre 1 Apto 303',100);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario,  otro, id_ciudad_ciudad_id)
+values (300,'carrera',90,'A',20,'H',25,'Torre 1 Apto 303',100);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (400,'calle',85,'B',30,'Torre 3 Apto 104',100);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario,  otro, id_ciudad_ciudad_id)
+values (400,'calle',85,'B',30,'H',63,'Torre 3 Apto 104',100);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (500,'calle',155,'B',40,'Casa 5',200);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (500,'calle',155,'B',40,'H',78,'Casa 5',200);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (600,'calle',1,'A',50,'Casa 15',200);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (600,'calle',1,'A',50,'H',45,'Casa 15',200);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (700,'calle',26,'Bis',60,'Casa 1',200);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (700,'calle',26,'Bis',60,'H',12,'Casa 1',200);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (800,'avenida',11,'B',70,'Torre 6 Apto 608',300);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (800,'avenida',11,'B',70,'H',7,'Torre 6 Apto 608',300);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (900,'avenida',30,'Bis',80,'Torre 4 Apto 408',300);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (900,'avenida',30,'Bis',80,'H',9,'Torre 4 Apto 408',300);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (1000,'diagonal',116,'B',90,'Casa 7',300);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (1000,'diagonal',116,'B',90,'H',5,'Casa 7',300);
 
-insert into cliente_direccion (id_direccion, via, num_principal, sufijo, num_secundario, otro, id_ciudad_ciudad_id)
-values (1100,'diagonal',100,'A',10,'Torre 3 Apto 408',200);
+insert into cliente_direccion (id_direccion, via, num_principal, sufijo1, num_secundario, sufijo2,num_terciario, otro, id_ciudad_ciudad_id)
+values (1100,'diagonal',100,'A',10,'H',2,'Torre 3 Apto 408',200);
