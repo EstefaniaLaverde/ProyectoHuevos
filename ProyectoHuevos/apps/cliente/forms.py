@@ -18,7 +18,7 @@ class ClienteForm(forms.ModelForm):
         }
         widgets = {
             'id_cliente': forms.TextInput(),
-            'nombre': forms.TextInput(),
-            'apellido' : forms.TextInput(),
-            'direccion_correo' : forms.TextInput(),
+            'nombre': forms.TextInput(attrs={'class':'form-control'}),
+            'apellido' : forms.TextInput(attrs={'class':'form-control'}),
+            'direccion_correo' : forms.TextInput(attrs={'class':'form-control','aria-describedby':"emailHelp"}),
         }
