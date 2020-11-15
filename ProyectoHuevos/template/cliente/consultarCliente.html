@@ -30,12 +30,12 @@
             <td>{{ cliente.apellido }}</td>
             <td>{{ cliente.direccion_correo }}</td>
             <td>
-              <a href="#">
+              <a href="{% url 'editarCliente' cliente.id_cliente %}">
                 <i class="far fa-edit"></i>  
               </a>
             </td>
             <td>
-              <a href="#">
+              <a href="{% url 'eliminarCliente' cliente.id_cliente %}">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>

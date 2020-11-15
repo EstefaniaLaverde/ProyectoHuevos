@@ -19,8 +19,8 @@
           Cliente
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="http://127.0.0.1:8000/cliente/crearCliente/">Crear cliente</a>
-          <a class="dropdown-item" href="http://127.0.0.1:8000/cliente/consultarCliente">Consultar cliente</a>
+          <a class="dropdown-item" href="{% url 'crearCliente' %}">Crear cliente</a>
+          <a class="dropdown-item" href="{% url 'consultarCliente' %}">Consultar cliente</a>
         </div>
       </li>
 
@@ -29,7 +29,7 @@
           Producto
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Crear producto</a>
+          <a class="dropdown-item" href="#">Crear producto</a> 
           <a class="dropdown-item" href="#">Consultar producto</a>
         </div>
 
@@ -38,8 +38,8 @@
             Repartidor
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Crear repartidor</a>
-            <a class="dropdown-item" href="#">Consultar repartidor</a>
+            <a class="dropdown-item" href="{% url 'crearRepartidor' %}">Crear repartidor</a>
+            <a class="dropdown-item" href="{% url 'consultarRepartidor' %}">Consultar repartidor</a>
           </div>
         </li>
 

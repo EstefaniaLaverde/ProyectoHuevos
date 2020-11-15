@@ -3,6 +3,6 @@ from apps.factura.views import index, crearRepartidor, consultarRepartidor
 
 urlpatterns = [
     path('', index),
-    path('crearRepartidor/', crearRepartidor),
-    path('consultarRepartidor', consultarRepartidor),
+    path('crearRepartidor/', crearRepartidor, name = 'crearRepartidor'),
+    path('consultarRepartidor', consultarRepartidor, name = 'consultarRepartidor'),
 ]
