@@ -17,8 +17,9 @@ class ClienteForm(forms.ModelForm):
             'direccion_correo':'Correo'
         }
         widgets = {
-            'id_cliente': forms.TextInput(),
+            'id_cliente': forms.TextInput(attrs={'class':'form-control'}),
             'nombre': forms.TextInput(attrs={'class':'form-control'}),
             'apellido' : forms.TextInput(attrs={'class':'form-control'}),
             'direccion_correo' : forms.TextInput(attrs={'class':'form-control','aria-describedby':"emailHelp"}),
+            #NOTA: si quiero que salga un calendario pongo .DateInput o en inspeccionar iput type='date'
         }

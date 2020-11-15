@@ -1,13 +1,13 @@
 {% extends 'base/base.html' %}
 {% block header %}
-{% include 'cliente/menu.html' %}
+{% include 'repartidor/menu.html' %}
 {% endblock %}
 {% block content %}
 
 <div class="container mt-3">
   <div class="card">
     <div class="card-header">
-      Clientes
+      Repartidores
     </div>
     <div class="card-body">
       <table class = 'table table-hover table-striped'>
@@ -16,19 +16,17 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>Apellido</th>
-            <th>Correo</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {% if clientes %}
-          {% for cliente in clientes %}
+          {% if repartidores %}
+          {% for repartidor in repartidores %}
           <tr>
-            <td>{{ cliente.id_cliente }}</td>
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.apellido }}</td>
-            <td>{{ cliente.direccion_correo }}</td>
+            <td>{{ repartidor.id_repartidor }}</td>
+            <td>{{ repartidor.nombre }}</td>
+            <td>{{ repartidor.apellido }}</td>
             <td>
               <a href="#">
                 <i class="far fa-edit"></i>  
