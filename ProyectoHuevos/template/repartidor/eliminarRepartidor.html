@@ -9,13 +9,13 @@
       <div class="col-6">
           <div class="card">
               <div class="card-header">
-                  <h3>Eliminar cliente</h3>
+                  <h3>Eliminar repartidor</h3>
               </div>
               
               <form method = 'post'>
                   {% csrf_token %}
                   <div class="alert alert warning" role="alert">
-                    Esta seguro que desea eliminar al cliente {{cliente.nombre}} {{cliente.apellido}}
+                    Esta seguro que desea eliminar al repartidor {{repartidor.nombre}} {{repartidor.apellido}}
                   </div>
                   <button type="submit" class="btn btn-primary">Eliminar</button>
               </form>

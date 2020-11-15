@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% block header %}
-{% include 'repartidor/menu.html' %}
+{% include 'base/menu.html' %}
 {% endblock %}
 {% block content %}
 
@@ -28,12 +28,12 @@
             <td>{{ repartidor.nombre }}</td>
             <td>{{ repartidor.apellido }}</td>
             <td>
-              <a href="#">
+              <a href="{% url 'editarRepartidor' repartidor.id_repartidor %}">
                 <i class="far fa-edit"></i>  
               </a>
             </td>
             <td>
-              <a href="#">
+              <a href="{% url 'eliminarRepartidor' repartidor.id_repartidor %}">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
