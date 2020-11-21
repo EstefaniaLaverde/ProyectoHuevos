@@ -8,6 +8,7 @@ def index(request):
     # return("Hola mundo :)")
     return render(request, 'cliente/inicio.html')
 
+@login_required
 def crearCliente(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
@@ -23,6 +24,7 @@ def consultarCliente(request):
 
     return render(request, 'cliente/consultarCliente.html', contexto)
 
+@login_required
 def editarCliente(request, id_cli):
     Cliente = cliente.objects.get(id_cliente = id_cli)
     if request.method == 'POST':
@@ -34,6 +36,7 @@ def editarCliente(request, id_cli):
         form = ClienteForm(instance = Cliente)
         return render(request, 'cliente/editarCliente.html', {'form' : form})
 
+@login_required
 def eliminarCliente(request, id_cli):
     Cliente = cliente.objects.get(id_cliente=id_cli)
     if request.method == 'POST':
