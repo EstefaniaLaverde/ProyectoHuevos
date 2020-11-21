@@ -44,3 +44,11 @@ def eliminarProducto(request, id_prod):
         return consultarProducto(request)
     else:
         return render(request, 'producto/eliminarProducto.html', {'producto' : Producto})
+
+def agregarCarrito (request, id_prod):
+    Producto = producto.objects.get(id_producto = id_prod)
+    if request.method == 'POST':
+        Producto.save()
+        return consultarProducto(request)
+    else:
+        return render(request, 'producto/consultarProducto.html', {'producto' : Producto})

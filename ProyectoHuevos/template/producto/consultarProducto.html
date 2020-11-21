@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% block header %}  
+{% block header %}
 {% if user.is_staff %}
 {% include 'base/menuAdministrador.html' %}
 {% elif user.groups.all.0.name == 'Cliente' %}
@@ -58,7 +58,15 @@
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
+
+
+
             {% endif %}
+            <td>
+              <a href="{% url 'agregarCarrito' producto.id_producto %}">
+                <i class="fas fa-cart-arrow-down"></i>
+              </a>
+            </td>
           </tr>
           {% endfor %}
           {% endif %}
