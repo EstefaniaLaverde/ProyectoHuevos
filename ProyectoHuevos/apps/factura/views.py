@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from apps.factura.models import repartidor
 from apps.factura.forms import RepartidorForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
