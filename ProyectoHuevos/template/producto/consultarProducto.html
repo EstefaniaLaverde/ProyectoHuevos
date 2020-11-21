@@ -1,6 +1,12 @@
 {% extends 'base/base.html' %}
-{% block header %}
-{% include 'base/menu.html' %}
+{% block header %}  
+{% if user.is_staff %}
+{% include 'base/menuAdministrador.html' %}
+{% elif user.groups.all.0.name == 'Cliente' %}
+{% include 'base/menuCliente.html' %}
+{% else%}
+{% include 'base/menuNoLog.html' %}
+{% endif %}
 {% endblock %}
 {% block content %}
 
@@ -17,11 +23,15 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Stock</th>
+            {% if user.is_staff %}
             <th>Cantidad Vendida</th>
             <th>Id administrador</th>
+            {% endif %}
             <th>Id categoria</th>
-            <th></th>
-            <th></th>
+            {% if user.is_staff %}
+              <th></th>
+              <th></th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -32,9 +42,12 @@
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.precio }}</td>
             <td>{{ producto.stock }}</td>
+            {% if user.is_staff %}
             <td>{{ producto.cantidad_venta }}</td>
             <td>{{ producto.id_administrador_id }}</td>
+            {% endif %}
             <td>{{ producto.id_categoria_id }}</td>
+            {% if user.is_staff %}
             <td>
               <a href="{% url 'editarProducto' producto.id_producto %}">
                 <i class="far fa-edit"></i>
@@ -45,6 +58,7 @@
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
+            {% endif %}
           </tr>
           {% endfor %}
           {% endif %}

@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from ProyectoHuevos.views import index
 
 urlpatterns = [
+    path('',index),
     path('admin/', admin.site.urls),
     path('cliente/', include('apps.cliente.urls')),
     path('repartidor/', include('apps.factura.urls')),
     path('producto/', include('apps.producto.urls')),
+    path('accounts/', include ('django.contrib.auth.urls')),
 ]

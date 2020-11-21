@@ -41,13 +41,15 @@
       </li>
     </ul>
   </div>
-  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
-        <li>
-          <a href="#">
-            <i class="fas fa-shopping-cart fa-lg" style="color:#ffffff;"></i>
-          </a>
-        </li>
-      </ul>
+  <div class="navbar-collapse collapse w-100 order- dual-collapse3">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Administrador {{ user.first_name }} {{ user.last_name }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{%  url 'logout' %}">Cerrar Sesión</a>
+      </li>
+    </ul>
+    
   </div>
 </nav>
