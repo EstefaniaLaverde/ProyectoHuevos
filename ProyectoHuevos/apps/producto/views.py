@@ -2,11 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from apps.producto.models import producto
 from apps.producto.forms import ProductoForm
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
 def index(request):
     return render(request, 'producto/inicio.html')
 
+@staff_member_required
 def crearProducto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)
@@ -22,6 +24,7 @@ def consultarProducto(request):
 
     return render(request, 'producto/consultarProducto.html', contexto)
 
+@staff_member_required
 def editarProducto(request, id_prod):
     Producto = producto.objects.get(id_producto = id_prod)
     if request.method == 'POST':
@@ -33,6 +36,7 @@ def editarProducto(request, id_prod):
         form = ProductoForm(instance = Producto)
         return render(request, 'producto/editarProducto.html', {'form' : form})
 
+@staff_member_required
 def eliminarProducto(request, id_prod):
     Producto = producto.objects.get(id_producto = id_prod)
     if request.method == 'POST':

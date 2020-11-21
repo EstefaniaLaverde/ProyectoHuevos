@@ -3,13 +3,14 @@ from django.http import HttpResponse
 from apps.factura.models import repartidor
 from apps.factura.forms import RepartidorForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 
 def index(request):
     return render(request, 'repartidor/inicio.html')
 
-@login_required
+@staff_member_required
 def crearRepartidor(request):
     if request.method == 'POST':
         form = RepartidorForm(request.POST)
@@ -19,14 +20,14 @@ def crearRepartidor(request):
         form = RepartidorForm()
         return render(request, 'repartidor/crearRepartidor.html', {'form' : form})
 
-@login_required
+@staff_member_required
 def consultarRepartidor(request):
     repartidores = repartidor.objects.all()
     contexto = {'repartidores':repartidores}
 
     return render(request, 'repartidor/consultarRepartidor.html', contexto)
 
-@login_required
+@staff_member_required
 def editarRepartidor(request, id_rep):
     Repartidor = repartidor.objects.get(id_repartidor = id_rep)
     if request.method == 'POST':
@@ -38,7 +39,7 @@ def editarRepartidor(request, id_rep):
         form = RepartidorForm(instance = Repartidor)
         return render(request, 'repartidor/editarRepartidor.html', {'form' : form})
 
-@login_required
+@staff_member_required
 def eliminarRepartidor(request, id_rep):
     Repartidor = repartidor.objects.get(id_repartidor=id_rep)
     if request.method == 'POST':
