@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from apps.producto.models import producto
 from apps.producto.forms import ProductoForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
@@ -45,6 +46,7 @@ def eliminarProducto(request, id_prod):
     else:
         return render(request, 'producto/eliminarProducto.html', {'producto' : Producto})
 
+@login_required
 def agregarCarrito (request, id_prod):
     Producto = producto.objects.get(id_producto = id_prod)
     if request.method == 'POST':

@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'ProyectoHuevos.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'PHuevos',
+    'NAME': 'Proyecto',
     'USER': 'postgres',
-    'PASSWORD': 'sugamuxi',
+    'PASSWORD': 'miContrPS2020',
     'HOST': 'localhost',
     'PORT': 5432,
  }
