@@ -18,7 +18,7 @@ from django.urls import path, include
 from ProyectoHuevos.views import index
 
 urlpatterns = [
-    path('',index),
+    path('',index, name='index'),
     path('admin/', admin.site.urls),
     path('cliente/', include('apps.cliente.urls')),
     path('repartidor/', include('apps.factura.urls')),
