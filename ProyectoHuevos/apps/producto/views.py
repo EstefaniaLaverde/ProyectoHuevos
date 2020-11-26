@@ -21,7 +21,7 @@ def crearProducto(request):
 
 def consultarProducto(request):
     productos = producto.objects.all()
-    contexto = {'productos':productos}
+    contexto = {'productos':productos}  
 
     return render(request, 'producto/consultarProducto.html', contexto)
 
