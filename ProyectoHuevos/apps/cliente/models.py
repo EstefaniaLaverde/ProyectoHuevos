@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from django.contrib.auth.models import User
 # Create your models here.
 
 class cliente(models.Model):
@@ -7,6 +8,7 @@ class cliente(models.Model):
     nombre = models.CharField(max_length=45)
     apellido = models.CharField(max_length=45)
     direccion_correo = models.CharField(max_length=65)
+    id_user = models.OneToOneField(User,on_delete=models.CASCADE,default=2)
 
 class telefono(models.Model):
     id_telefono = models.AutoField(primary_key=True)
