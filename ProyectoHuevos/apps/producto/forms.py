@@ -1,6 +1,6 @@
 from django import forms
 from apps.producto.models import producto
-
+from apps.carrito.models import carrito_producto
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = producto
@@ -30,4 +30,24 @@ class ProductoForm(forms.ModelForm):
             'cantidad_venta': forms.TextInput(attrs={'class':'form-control'}),
             'id_categoria': forms.TextInput(attrs={'class':'form-control'}),
             'id_administrador': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+class agregarCarritoForm(forms.ModelForm):
+    class Meta:
+        model = carrito_producto
+        fields = [
+            'id_carrito_carrito'
+            'id_producto_producto',
+            'cantidad',
+        ]
+        fields = {
+            'id_carrito_carrito':'Id carrito',
+            'id_producto_producto':'Id Producto',
+            'cantidad':'hola'
+        }
+        widgets = {
+            'id_carrito_carrito': forms.TextInput(attrs={'class':'form-control'}),
+            'id_producto_producto': forms.TextInput(attrs={'class':'form-control'}),
+            'cantidad' : forms.TextInput(attrs={'class':'form-control'}),
+
         }

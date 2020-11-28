@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from apps.producto.models import producto
 from apps.producto.forms import ProductoForm
+from apps.producto.forms import agregarCarritoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-# Create your views here.
+
 
 def index(request):
     return render(request, 'producto/inicio.html')
@@ -21,7 +22,7 @@ def crearProducto(request):
 
 def consultarProducto(request):
     productos = producto.objects.all()
-    contexto = {'productos':productos}  
+    contexto = {'productos':productos}
 
     return render(request, 'producto/consultarProducto.html', contexto)
 
@@ -48,9 +49,24 @@ def eliminarProducto(request, id_prod):
 
 @login_required
 def agregarCarrito (request, id_prod):
-    Producto = producto.objects.get(id_producto = id_prod)
     if request.method == 'POST':
-        Producto.save()
+        form = agregarCarritoForm(request.POST)
+        form.save()
         return consultarProducto(request)
     else:
-        return render(request, 'producto/consultarProducto.html', {'producto' : Producto})
+        form = agregarCarritoForm()
+        return render(request, 'producto/agregarCarrito.html', {'form' : form})
+
+
+
+
+
+
+# def crearProducto(request):
+    # if request.method == 'POST':
+    #     form = ProductoForm(request.POST)
+    #     form.save()
+    #     return consultarProducto(request)
+    # else:
+    #     form = ProductoForm()
+    #     return render(request, 'Producto/crearProducto.html', {'form' : form})

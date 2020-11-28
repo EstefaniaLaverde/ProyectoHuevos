@@ -1,8 +1,6 @@
 from django.db import models
-
 from django.contrib import admin
 
-# Create your models here.
 
 class categoria(models.Model):
     id_categoria = models.IntegerField(primary_key=True)
