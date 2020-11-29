@@ -2,10 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from apps.producto.models import producto
 from apps.producto.forms import ProductoForm
-from apps.producto.forms import agregarCarritoForm
+from apps.carrito.forms import agregarCarritoForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-
 
 def index(request):
     return render(request, 'producto/inicio.html')
@@ -31,7 +30,7 @@ def editarProducto(request, id_prod):
     Producto = producto.objects.get(id_producto = id_prod)
     if request.method == 'POST':
         form = ProductoForm(request.POST, instance = Producto)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
         return consultarProducto(request)
     else:
@@ -46,27 +45,3 @@ def eliminarProducto(request, id_prod):
         return consultarProducto(request)
     else:
         return render(request, 'producto/eliminarProducto.html', {'producto' : Producto})
-
-@login_required
-def agregarCarrito (request, id_prod):
-    if request.method == 'POST':
-        form = agregarCarritoForm(request.POST)
-        form.save()
-        return consultarProducto(request)
-    else:
-        form = agregarCarritoForm()
-        return render(request, 'producto/agregarCarrito.html', {'form' : form})
-
-
-
-
-
-
-# def crearProducto(request):
-    # if request.method == 'POST':
-    #     form = ProductoForm(request.POST)
-    #     form.save()
-    #     return consultarProducto(request)
-    # else:
-    #     form = ProductoForm()
-    #     return render(request, 'Producto/crearProducto.html', {'form' : form})

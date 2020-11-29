@@ -2,10 +2,8 @@ from django.db import models
 #importamos para usar la FK
 from apps.cliente.models import cliente
 from apps.producto.models import producto
-
 from django.contrib import admin
 
-# Create your models here.
 
 class carrito(models.Model):
     id_carrito = models.AutoField(primary_key=True)
