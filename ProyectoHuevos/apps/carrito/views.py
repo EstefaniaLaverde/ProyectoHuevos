@@ -19,6 +19,7 @@ def index(request):
 #     contexto = {'carrito':carrito}
 #     return render(request, 'carrito/inicio.html', contexto)
 
+@login_required
 def consultarCarrito(request):
     username = request.user.get_username()
     return render(request, 'carrito/consultarCarrito.html',{'username':username})

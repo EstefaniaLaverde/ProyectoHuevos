@@ -1,1 +1,67 @@
-{{ username }}
+{% extends 'base/base.html' %}
+{% block header %}
+{% if user.is_staff %}
+{% include 'base/menuAdministrador.html' %}
+{% elif user.groups.all.0.name == 'Cliente' %}
+{% include 'base/menuCliente.html' %}
+{% else%}
+{% include 'base/menuNoLog.html' %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h3>Carro de compras</h3>
+        </div>  
+        <div class="card-body">
+         <table class = 'table table-hover table-striped'>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                    <th>Precio total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if carro%}
+            {% for producto in carro %}
+                {%for p in desc_productos%}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                    <tr>
+                        <td>{{p.nombre}}</td>
+                        <td>{{producto.cantidad}}</td>
+                        <td><a type="button"><i class="fas fa-plus" id="mas{{p.id_producto}}"></i></a></td>
+                        <td>{% widthratio p.precio 1 producto.cantidad%}</td>   
+                    </tr>   
+                    {%endif%}
+                {% endfor %}
+            {% endfor %}
+            {% endif %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
+
+<script type="text/javascript">
+    {%for producto in carrito%}
+    console.log({{producto.id_producto_producto_id}})
+    $("#mas{{producto.id_producto_producto_id}}").on('click', function(){
+        console.log('Hola')
+    $.ajax({
+        url:'{%  url 'consultarCarrito' %}',
+        type = 'POST',
+        data:{
+            id: {{producto.cantidad}}
+        }
+    }).done(function (data){
+        console.log(data)
+    })
+    })
+    {% endfor %}
+    
+</script>
