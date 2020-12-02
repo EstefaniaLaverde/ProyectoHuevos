@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.carrito.views import index, carrito, consultarCarrito, agregarCarrito, verificarIds, sumarItem 
+from apps.carrito.views import index, carrito, consultarCarrito, agregarCarrito, verificarIds, sumarItem, restarItem
 
 urlpatterns = [
     path('', index),
@@ -8,4 +8,6 @@ urlpatterns = [
     path('agregarCarrito/', agregarCarrito, name = 'agregarCarrito'),
     path('verificarIds/<id_prod>', verificarIds, name = 'verificarIds'),
     path('sumar/', sumarItem, name='sumar'),
+    path('restar/', restarItem, name='restar'),
+
 ]

@@ -22,23 +22,26 @@
             <thead>
                 <tr>
                     <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th></th>
-                    <th>Precio total</th>
+                    <th style='text-align:center'>Cantidad</th>
+                    <th style='text-align:center'>Precio total</th>
                 </tr>
             </thead>
             <tbody>
+            {% csrf_token %}
             {% if carro%}
             {% for producto in carro %}
                 {%for p in desc_productos%}
+                    {% if producto.cantidad > 0 %}
                     {% if forloop.counter == forloop.parentloop.counter %}
                     <tr>
                         <td>{{p.nombre}}</td>
-                        <td>{{producto.cantidad}}</td>
-                        <td>{% csrf_token %}<a type="button"><i class="fas fa-plus" id="plus{{p.id_producto}}"></i></a></td>
-                        <td>{% widthratio p.precio 1 producto.cantidad%}</td>   
+                        <td style='text-align:center'> <a type="button" data-toggle="tooltip" data-placement="top" title="Eliminar una unidad"><i class="fas fa-minus" style='color:#ff6600' id="minus{{p.id_producto}}" ></i></a>&nbsp&nbsp&nbsp
+                        {{producto.cantidad}}&nbsp&nbsp&nbsp
+                        <a type="button" data-toggle="tooltip" data-placement="right" title="Añadir una unidad"><i class="fas fa-plus" style='color:#ff6600' id="plus{{p.id_producto}}"></i></a></td>
+                        <td style='text-align:center'>{% widthratio p.precio 1 producto.cantidad%}</td>   
                     </tr>   
                     {%endif%}
+                    {% endif %}
                 {% endfor %}
             {% endfor %}
             {% endif %}
@@ -60,13 +63,28 @@
     data = {{id_productos}}
     for (p in data){
         boton = "#plus" + data[p]
+        boton2 = "#minus" + data[p]
         //console.log(boton)
-        
+
         $(document).on('click',boton,function(e){
             e.preventDefault();
             $.ajax({
                 type:'POST',
                 url:'{%  url 'sumar' %}',
+                data:{
+                    id_producto: data[p],//5
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+            success: function(){
+                alert('Por fin!')
+            }
+       
+    })})
+        $(document).on('click',boton2,function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'{%  url 'restar' %}',
                 data:{
                     id_producto: data[p],//5
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()

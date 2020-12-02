@@ -32,8 +32,12 @@
               <th></th>
               <th></th>
             {% endif %}
+            {% if not user.is_staff %}
+              <th></th>
+            {% endif %}
           </tr>
         </thead>
+        {% csrf_token %}
         <tbody>
           {% if productos %}
           {% for producto in productos %}
@@ -58,13 +62,22 @@
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>
-
             {% endif %}
+            {% if not user.is_staff %}
+            {%if user.groups.all.0.name == 'Cliente'%}
             <td>
-              <a href="{% url 'verificarIds' producto.id_producto %}">
+              <a type="button" data-placement="right" title="Añadir al carrito" id="add{{producto.id_producto}}">
                 <i class="fas fa-cart-arrow-down"></i>
               </a>
             </td>
+            {% else %}
+            <td>
+              <a type="button" data-placement="right" title="Inicie sesión para añadir al carrito" disabled>
+                <i class="fas fa-cart-arrow-down"></i>
+              </a>
+            </td>
+          {% endif %}
+          {% endif %}
           </tr>
           {% endfor %}
           {% endif %}
@@ -73,4 +86,27 @@
     </div>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    data = {{id_productos}}
+    for (p in data){
+        boton = "#add" + data[p]
+        $(document).on('click',boton,function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'{%  url 'add' %}',
+                data:{
+                    id_producto: data[p],//5
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+                },
+            success: function(){
+                alert('Por fin!')
+            }      
+    })})
+    }
+    
+    </script>
 {% endblock %}
