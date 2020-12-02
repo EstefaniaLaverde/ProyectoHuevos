@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'ProyectoHuevos.wsgi.application'
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'ProyectoHuevos',
+    'NAME': 'PHuevos',
     'USER': 'postgres',
-    'PASSWORD': 'Juanlu17',
+    'PASSWORD': 'sugamuxi',
     'HOST': 'localhost',
     'PORT': 5432,
  }
@@ -127,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR, 'static']
-    
+
 
 LOGIN_REDIRECT_URL = '/producto/consultarProducto'
 LOGOUT_REDIRECT_URL = '/'

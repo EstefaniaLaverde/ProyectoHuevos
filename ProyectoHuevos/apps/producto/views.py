@@ -20,7 +20,7 @@ def crearProducto(request):
         return render(request, 'Producto/crearProducto.html', {'form' : form})
 
 def consultarProducto(request):
-    productos = producto.objects.all()
+    productos = producto.objects.filter(stock__gt = 0)
     contexto = {'productos':productos}
 
     return render(request, 'producto/consultarProducto.html', contexto)
