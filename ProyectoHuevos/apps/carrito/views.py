@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
+from apps.cliente.models import cliente
+import apps.carrito.models
+from apps.producto.models import producto
 from apps.carrito.models import carrito
 from apps.carrito.models import carrito_producto
 from apps.carrito.forms import agregarCarritoForm
@@ -9,7 +12,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from apps.producto.models import producto
 from apps.producto.views import consultarProducto
-# Create your views here.
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+from django.core.serializers import serialize
+
+
+# Create your views here.sds
 
 def index(request):
     return render(request, 'carrito/inicio.html')
@@ -21,8 +29,18 @@ def index(request):
 
 @login_required
 def consultarCarrito(request):
-    username = request.user.get_username()
-    return render(request, 'carrito/consultarCarrito.html',{'username':username})
+    user = request.user
+    id_productos = []
+    id_cliente = cliente.objects.get(id_user = user.id).id_cliente
+    id_carrito = carrito.objects.get(id_cliente = id_cliente).id_carrito
+    productos_carrito = carrito_producto.objects.filter(id_carrito_carrito=id_carrito)
+    #Se añaden a una lista los precios de los productos del carrito
+    for product in productos_carrito:
+        # precios.append(producto.objects.get(id_producto = product.id_producto_producto_id).precio)
+        # nombres.append(producto.objects.get(id_producto = product.id_producto_producto_id).nombre)
+        id_productos.append(product.id_producto_producto_id)
+    descripcion_productos = producto.objects.filter(id_producto__in=id_productos)
+    return render(request, 'carrito/consultarCarrito.html',{'user':user,'carro':productos_carrito,'desc_productos':descripcion_productos,'id_productos':id_productos})
 
 @login_required
 def verificarIds (request, id_prod):
@@ -47,3 +65,18 @@ def agregarCarrito (request, id_prod):
     else:
         form = agregarCarritoForm()
         return render(request, 'producto/agregarCarrito.html', {'form' : form})
+
+def sumarItem(request):
+    if request.method == 'POST':
+        id_producto = request.POST['id_producto']
+        user = request.user
+        id_cliente = cliente.objects.get(id_user = user.id).id_cliente
+        id_carrito = carrito.objects.get(id_cliente_id = id_cliente).id_carrito
+        print(id_carrito)
+        query0 = carrito_producto.objects.filter(id_carrito_carrito=id_carrito)
+        query = query0.get(id_producto_producto_id = id_producto)
+        cantidad = list(query0.filter(id_producto_producto_id = id_producto).values('cantidad'))[0]['cantidad']
+        print(cantidad)
+        query.cantidad = 1 + int(cantidad)
+        query.save()
+        return HttpResponse('')
