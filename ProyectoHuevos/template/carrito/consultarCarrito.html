@@ -1,6 +1,5 @@
 {% extends 'base/base.html' %}
 {% load static %}
-
 {% block header %}
 {% if user.is_staff %}
 {% include 'base/menuAdministrador.html' %}
@@ -12,6 +11,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container mt-3">
     <div class="card">
         <div class="card-header">
@@ -31,17 +31,15 @@
             {% if carro%}
             {% for producto in carro %}
                 {%for p in desc_productos%}
-                    {% if producto.cantidad > 0 %}
                     {% if forloop.counter == forloop.parentloop.counter %}
                     <tr>
                         <td>{{p.nombre}}</td>
-                        <td style='text-align:center'> <a type="button" data-toggle="tooltip" data-placement="top" title="Eliminar una unidad"><i class="fas fa-minus" style='color:#ff6600' id="minus{{p.id_producto}}" ></i></a>&nbsp&nbsp&nbsp
-                        {{producto.cantidad}}&nbsp&nbsp&nbsp
-                        <a type="button" data-toggle="tooltip" data-placement="right" title="Añadir una unidad"><i class="fas fa-plus" style='color:#ff6600' id="plus{{p.id_producto}}"></i></a></td>
-                        <td style='text-align:center'>{% widthratio p.precio 1 producto.cantidad%}</td>   
+                        <td style='text-align:center'> <a type="button" data-toggle="tooltip" data-placement="top" title="Eliminar una unidad"><i class="fas fa-minus" style='color:#ff6600' id="minus{{producto.id_producto_producto_id}}" ></i></a> <span style="padding:10px" id="text{{producto.id_producto_producto_id}}">
+                        {{producto.cantidad}}</span>
+                        <a type="button" data-toggle="tooltip" data-placement="right" title="Añadir una unidad"><i class="fas fa-plus" style='color:#ff6600' id="plus{{producto.id_producto_producto_id}}"></i></a></td>
+                        <td style='text-align:center' id="precio{{producto.id_producto_producto_id}}">{% widthratio p.precio 1 producto.cantidad%}</td>   
                     </tr>   
                     {%endif%}
-                    {% endif %}
                 {% endfor %}
             {% endfor %}
             {% endif %}
@@ -60,37 +58,49 @@
 
 
     <script type="text/javascript">
+    //console.log{{carro}}
+    let value = undefined;
+    
     data = {{id_productos}}
     for (p in data){
         boton = "#plus" + data[p]
         boton2 = "#minus" + data[p]
-        //console.log(boton)
-
-        $(document).on('click',boton,function(e){
-            e.preventDefault();
+        //console.log(p)
+        $(document).on('click',boton,{param: data[p]},function (e){
+            //e.preventDefault();
+            console.log('Hicimos click')
             $.ajax({
                 type:'POST',
                 url:'{%  url 'sumar' %}',
                 data:{
-                    id_producto: data[p],//5
+                    id_producto: e.data.param,//5
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
                 },
             success: function(){
                 alert('Por fin!')
             }
-       
     })})
-        $(document).on('click',boton2,function(e){
+        $(document).on('click',boton2,{param: data[p]},function(e){
             e.preventDefault();
+            //console.log(e.data.param)
             $.ajax({
                 type:'POST',
                 url:'{%  url 'restar' %}',
                 data:{
-                    id_producto: data[p],//5
+                    id_producto: e.data.param,//5
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
                 },
-            success: function(){
-                alert('Por fin!')
+            success: function(res){
+                //alert(res[2])
+                params = res.split(",")
+                console.log(params)
+                name = "#text" + params[0]
+                name1 = "#precio" + params[0]
+                $(name)[0].innerText = params[1]-1
+                $(name1)[0].innerText = params[2]*(params[1]-1)
+
+
+
             }
        
     })

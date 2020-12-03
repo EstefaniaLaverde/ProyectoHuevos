@@ -53,6 +53,7 @@ def eliminarProducto(request, id_prod):
 @login_required
 def addProducto(request):
     id_producto = request.POST['id_producto']
+    print(id_producto)
     user = request.user
     id_cliente = cliente.objects.get(id_user = user.id).id_cliente
     new_product = carrito_producto(id_carrito_carrito=carrito.objects.get(id_cliente_id = id_cliente), id_producto_producto=producto.objects.get(id_producto= id_producto), cantidad=1)
