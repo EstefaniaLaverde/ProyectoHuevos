@@ -49,6 +49,12 @@
     </div>
 </div> 
 
+<div class="text-center" style="margin:20px">
+    <a role="button" class="btn btn-success btn-lg" href="{%  url 'consultarProducto' %}">Seguir comprando</a>
+
+<div class="text-center" style="margin:20px">
+<button type="button" class="btn btn-warning btn-lg">Pagar</button>
+</div>
 
 {% comment %} <script type="text/javascript" src= "{% static 'js/material.js' %}"> </script>
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script> {% endcomment %}
@@ -80,7 +86,8 @@
                 alert('Por fin!')
             }
     })})
-        $(document).on('click',boton2,{param: data[p]},function(e){
+        parametro = data[p]
+        $(document).on('click',boton2,{param: parametro},function(e){
             e.preventDefault();
             //console.log(e.data.param)
             $.ajax({
@@ -98,9 +105,6 @@
                 name1 = "#precio" + params[0]
                 $(name)[0].innerText = params[1]-1
                 $(name1)[0].innerText = params[2]*(params[1]-1)
-
-
-
             }
        
     })

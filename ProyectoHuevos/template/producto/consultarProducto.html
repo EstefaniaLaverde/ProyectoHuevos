@@ -72,7 +72,7 @@
             </td>
             {% else %}
             <td>
-              <a type="button" data-placement="right" title="Inicie sesión para añadir al carrito" disabled>
+              <a type="button" data-placement="right" title="Inicie sesión para añadir al carrito" onclick="logeate()">
                 <i class="fas fa-cart-arrow-down"></i>
               </a>
             </td>
@@ -87,19 +87,24 @@
   </div>
 </div>
 
+<script>
+function logeate(){
+  alert('Inicia sesión para añadir este producto al carrito')
+}
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
     data = {{id_productos}}
     for (p in data){
         boton = "#add" + data[p]
-        $(document).on('click',boton,function(e){
+        $(document).on('click',boton,{param: data[p]},function(e){
             e.preventDefault();
             $.ajax({
                 type:'POST',
                 url:'{%  url 'add' %}',
                 data:{
-                    id_producto: data[p],//5
+                    id_producto: e.data.param,//5
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
                 },
             success: function(){

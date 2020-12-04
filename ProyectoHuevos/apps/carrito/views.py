@@ -85,9 +85,12 @@ def sumarItem(request):
 def restarItem(request):
     if request.method == 'POST':
         id_producto_r = request.POST['id_producto']
+        print("Id producto recibido:")
+        print(id_producto_r)
         user = request.user
         id_cliente = cliente.objects.get(id_user = user.id).id_cliente
         id_carrito = carrito.objects.get(id_cliente_id = id_cliente).id_carrito
+        print("Carrito:")
         print(id_carrito)
         query0 = carrito_producto.objects.filter(id_carrito_carrito=id_carrito)
         query = query0.get(id_producto_producto_id = id_producto_r)
@@ -96,7 +99,7 @@ def restarItem(request):
         query.cantidad = int(cantidad) - 1
         query.save()
         precio = list(producto.objects.filter(id_producto = id_producto_r).values('precio'))[0]['precio']
-        print(id_producto_r)
+        
         print(precio)
         # return HttpResponse([id_producto,cantidad,precio])  
         res = str(id_producto_r) + ',' + str(cantidad) + ',' + str(precio)
